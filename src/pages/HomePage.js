@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./ProductPage.css"; // CSS for enhanced styling
 import api from "../utils/api";
+import { useNavigate } from "react-router-dom";
 
-const ProductPage = () => {
+const ProductPage = ( {cart, handleAddToCart} ) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Handle loading state
   const [error, setError] = useState(""); // Handle errors
+  const navigate = useNavigate();
 
   // Fetch products from API on component mount
   useEffect(() => {
@@ -49,7 +51,7 @@ const ProductPage = () => {
         <div key={typeId} className="product-section">
           <div className="category-header">
             <h2>{ typeId }</h2>
-            <button>View All</button>
+            {/* <button>View All</button> */}
           </div>
           <div className="product-row">
             {groupedProducts[typeId].map((product) => (
@@ -62,7 +64,11 @@ const ProductPage = () => {
                 <h3>{product.name}</h3>
                 <p className="product-description">{product.description}</p>
                 <p className="price">Price: ₹{product.price}</p>
-                <button className="add-to-cart-btn">Add to Cart</button>
+                {cart.some(item => item.product.id === product.id) ? (
+                  <button  className="go-to-cart-btn" onClick={() => navigate('/cart')}>Go to Cart</button>
+                ) : (
+                  <button  className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
+                )}
               </div>
             ))}
           </div>

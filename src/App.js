@@ -46,7 +46,7 @@ const App = () => {
   };
 
   // Add to cart function with alert for duplicates
-  const handleAddToCart = (product) => {
+  const handleAddToCart = async (product) => {
     const productExists = cart.find((item) => item.id === product.id);
 
     if (productExists) {
@@ -56,8 +56,16 @@ const App = () => {
       setTimeout(() => setNotification(""), 3000);
     } else {
       setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
-      setNotification(`${product.name} has been added to your cart!`);
-      setTimeout(() => setNotification(""), 3000);
+      const res = await api.post("/user/cart", {product_id: product.id, quantity: 1});
+      console.log(`this is res:`);
+      console.log(res);
+      if(res.data.message === "Success") {
+        setNotification(`${product.name} has been added to your cart!`);
+        setTimeout(() => setNotification(""), 3000);
+      } else {
+        setNotification("Error adding to cart!");
+        setTimeout(() => setNotification(""), 3000);
+      }
     }
   };
 
@@ -95,7 +103,18 @@ const App = () => {
     let tempcart = cart;
     let res;
     if (newQuantity === 0) {
-      tempcart = tempcart.filter((item) => item.id !== cartitemId);
+      res = await api.delete("/user/cartitem/"+cartitemId);
+      console.log(`this is res:`);
+      console.log(res);
+      if(res.data.message === "Success") {
+        tempcart = tempcart.filter((item) => item.id !== cartitemId);
+        setCart(tempcart);
+        setNotification("Cart item deleted successfully!");
+        setTimeout(() => setNotification(""), 3000);
+      } else {
+        setNotification("Error deleting cart item!");
+        setTimeout(() => setNotification(""), 3000);
+      }
     } else {
       tempcart = tempcart.map((item) =>
         item.id === cartitemId ? { ...item, quantity: newQuantity } : item
@@ -127,7 +146,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
+          element={isLoggedIn ? <HomePage cart={cart} handleAddToCart={handleAddToCart} /> : <Navigate to="/login" />}
         />
         <Route
           path="/cart"
@@ -152,7 +171,7 @@ const App = () => {
           path="/product/:id"
           element={
             isLoggedIn ? (
-              <ProductPage onAddToCart={handleAddToCart} />
+              <ProductPage onAddToCart={handleAddToCart} cart={cart} />
             ) : (
               <Navigate to="/login" />
             )

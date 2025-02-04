@@ -1,9 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const ProductPage = ({ onAddToCart }) => {
+const ProductPage = ({ onAddToCart, cart }) => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   // Sample product data (this can come from a database or API)
   const product = {
     id,
@@ -23,7 +23,11 @@ const ProductPage = ({ onAddToCart }) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Price: ₹{product.price}</p>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      {cart.some(item => item.product.id === product.id) ? (
+        <button onClick={() => navigate('/cart')}>Go to Cart</button>
+      ) : (
+        <button onClick={handleAddToCart}>Add to Cart</button>
+      )}
     </div>
   );
 };
