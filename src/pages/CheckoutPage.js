@@ -1,49 +1,72 @@
 import React from 'react';
-import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
-const CheckoutPage = ({ cart }) => {
+const CheckoutPage = ({ cart = [], clearCart }) => {
   const navigate = useNavigate();
-  const totalPrice = cart.reduce((total, cart_item) => total + cart_item.product.price * cart_item.quantity, 0);
-  const placeOrder = async () => {
-    const order = {
-      order_items: cart.map(item => ({
-        product_id: item.product.id,
-        quantity: item.quantity
-      })),
-      total: totalPrice,
-      pay_method: "COD",
-      delivery_address: "1234567890",
-      delivery_date: "2025-02-05",
+
+  // Add null check for cart items
+  const totalPrice = cart.reduce((total, cartItem) => {
+    if (cartItem && cartItem.product && cartItem.product.price && cartItem.quantity) {
+      return total + (cartItem.product.price * cartItem.quantity);
     }
-    const res = await api.post("/order", order);
-    if(res.data.message === "Created") {
-      alert('Order placed successfully!');
-      navigate('/order');
-    } else {
-      alert('Error placing order!');
+    return total;
+  }, 0);
+
+  const handlePlaceOrder = () => {
+    try {
+      if (!cart || cart.length === 0) {
+        throw new Error('Cart is empty');
+      }
+
+      const orderDetails = {
+        order_items: cart.map(item => ({
+          product_id: item.product.id,
+          quantity: item.quantity
+        })),
+        total: totalPrice,
+        delivery_address: "1234567890",
+        delivery_date: "2025-02-05",
+      };
+
+      // Navigate to payment page with order details
+      navigate('/payment', { 
+        state: { 
+          orderDetails 
+        }
+      });
+    } catch (error) {
+      console.error("Failed to process order:", error);
+      alert('Error processing order!');
     }
-  }
+  };
     
+  if (!cart || cart.length === 0) {
+    return (
+      <div className="container">
+        <h2>Checkout</h2>
+        <p>Your cart is empty</p>
+        <button onClick={() => navigate('/')}>Continue Shopping</button>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <h2>Checkout</h2>
-      {cart.length === 0 ? (
-        <p>No items in the cart.</p>
-      ) : (
-        <div>
-          <h3>Order Summary</h3>
-          {cart.map((cart_item, index) => (
+      <div>
+        <h3>Order Summary</h3>
+        {cart.map((cartItem, index) => (
+          cartItem && cartItem.product ? (
             <div key={index} className="checkout-item">
-              <h4>{cart_item.product.name}</h4>
-              <p>Quantity: {cart_item.quantity}</p>
-              <p>Price: ₹{cart_item.product.price}</p>
+              <h4>{cartItem.product.name}</h4>
+              <p>Quantity: {cartItem.quantity}</p>
+              <p>Price: ₹{cartItem.product.price}</p>
             </div>
-          ))}
-          <h3>Total Price: ₹{totalPrice}</h3>
-          <button onClick={placeOrder}>Place Order</button>
-        </div>
-      )}
+          ) : null
+        ))}
+        <h3>Total Price: ₹{totalPrice}</h3>
+        <button onClick={handlePlaceOrder}>Place Order</button>
+      </div>
     </div>
   );
 };

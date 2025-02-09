@@ -1,0 +1,90 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-header {
+  background-color: #2874f0;
+  color: white;
+  padding: 1.5rem;
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.profile-content {
+  padding: 1.5rem;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section:last-child {
+  margin-bottom: 0;
+}
+
+.profile-section h2 {
+  color: #212121;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-field label {
+  color: #878787;
+  font-size: 0.9rem;
+}
+
+.profile-field p {
+  color: #212121;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.profile-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #2874f0;
+  font-size: 1.1rem;
+}
+
+.profile-error {
+  text-align: center;
+  padding: 2rem;
+  color: #ff6161;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1rem auto;
+  }
+
+  .profile-header {
+    padding: 1rem;
+  }
+
+  .profile-content {
+    padding: 1rem;
+  }
+} 

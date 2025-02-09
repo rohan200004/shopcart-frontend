@@ -1,22 +1,98 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({ isLoggedIn, onLogout }) => {
+  const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && 
+          !dropdownRef.current.contains(event.target) && 
+          !buttonRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleProfileClick = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleLoginClick = () => {
+    setShowDropdown(false);
+    navigate('/login');
+  };
+
+  const handleLogoutClick = () => {
+    setShowDropdown(false);
+    onLogout();
+  };
+
   return (
     <nav className="nav">
-      <span>ShopCart</span>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/cart">Cart</Link></li>
-        <li><Link to="/order">Orders</Link></li>
+      <span className="brand-logo">ShopCart</span>
+      <div className="nav-links">
+        <button 
+          className="nav-button" 
+          onClick={() => navigate('/')}
+        >
+          Home
+        </button>
+        <button 
+          className="nav-button" 
+          onClick={() => navigate('/cart')}
+        >
+          Cart
+        </button>
+        <button 
+          className="nav-button" 
+          onClick={() => navigate('/order')}
+        >
+          Orders
+        </button>
         {isLoggedIn && (
-          <li>
-            <button onClick={onLogout}>
-              Logout
+          <div className="profile-menu">
+            <button 
+              ref={buttonRef}
+              className="profile-button"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              Menu
             </button>
-          </li>
+            {showDropdown && (
+              <div ref={dropdownRef} className="profile-dropdown">
+                <button 
+                  className="dropdown-item"
+                  onClick={() => {
+                    setShowDropdown(false);
+                    navigate('/profile');
+                  }}
+                >
+                  <i className="fas fa-user-circle"></i>
+                  Profile
+                </button>
+                <button 
+                  className="dropdown-item"
+                  onClick={() => {
+                    setShowDropdown(false);
+                    onLogout();
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         )}
-      </ul>
+      </div>
     </nav>
   );
 };

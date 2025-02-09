@@ -13,21 +13,29 @@ import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OrdersPage from "./pages/OrdersPage";
+import ProductDetailsPage from './pages/ProductDetailsPage';
+import PaymentPage from './pages/PaymentPage';
+import ProfilePage from './pages/ProfilePage';
 import api from "./utils/api";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cart, setCart] = useState([]); // Cart state
+  const [cart, setCart] = useState([]);
   const [notification, setNotification] = useState(""); // Notification state
 
   useEffect(() => {
     const getCart = async () => {
-      const data =  await api.get("/user/cart");
-      if (data != null){
-        setCart(data.data.data[0].cart_item);
-        console.log(data.data.data[0].cart_item);
+      try {
+        const response = await api.get("/user/cart");
+        if (response && response.data && response.data.data && response.data.data[0]) {
+          setCart(response.data.data[0].cart_item || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch cart:", error);
+        setCart([]);
       }
-    }
+    };
+
     const userLoggedIn = localStorage.getItem("isLoggedIn");
     if (userLoggedIn) {
       setIsLoggedIn(true);
@@ -138,6 +146,17 @@ const App = () => {
   }
   };
 
+  const clearCart = async () => {
+    try {
+      setCart([]);  // Clear cart in frontend state
+      const res = await api.delete("/user/cart");
+      console.log(`this is res:`);
+      console.log(res);
+    } catch (error) {
+      console.error("Failed to clear cart:", error);
+    }
+  };
+
   return (
     <Router>
       <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
@@ -164,14 +183,18 @@ const App = () => {
         <Route
           path="/checkout"
           element={
-            isLoggedIn ? <CheckoutPage cart={cart} /> : <Navigate to="/login" />
+            isLoggedIn ? (
+              <CheckoutPage cart={cart} clearCart={clearCart} />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
         <Route
           path="/product/:id"
           element={
             isLoggedIn ? (
-              <ProductPage onAddToCart={handleAddToCart} cart={cart} />
+              <ProductDetailsPage cart={cart} handleAddToCart={handleAddToCart} />
             ) : (
               <Navigate to="/login" />
             )
@@ -182,6 +205,26 @@ const App = () => {
           element={
             isLoggedIn ? (
               <OrdersPage/>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            isLoggedIn ? (
+              <PaymentPage clearCart={clearCart} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            isLoggedIn ? (
+              <ProfilePage />
             ) : (
               <Navigate to="/login" />
             )

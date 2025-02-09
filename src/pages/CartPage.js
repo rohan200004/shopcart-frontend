@@ -1,51 +1,80 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './CartPage.css';
 
-const CartPage = ({ cart, onUpdateCartQuantity }) => {
-  const navigate = useNavigate(); // Initialize navigation
+const CartPage = ({ cart = [], onUpdateCartQuantity }) => {
+  const navigate = useNavigate();
 
-  const totalPrice = cart.reduce((total, cart_item) => total + cart_item.product.price * cart_item.quantity, 0);
-
-  const handleQuantityChange = (productId, event) => {
-    const newQuantity = parseInt(event.target.value, 10);
-    onUpdateCartQuantity(productId, newQuantity);
-  };
-
-  const handleCheckout = () => {
-    if (cart.length > 0) {
-      navigate('/checkout'); // Redirect to the checkout page
-    } else {
-      alert('Your cart is empty! Add products to checkout.');
+  // Add null check for cart items
+  const totalPrice = cart.reduce((total, cartItem) => {
+    if (cartItem && cartItem.product && cartItem.product.price && cartItem.quantity) {
+      return total + (cartItem.product.price * cartItem.quantity);
     }
-  };
+    return total;
+  }, 0);
+
+  if (!cart || cart.length === 0) {
+    return (
+      <div className="empty-cart">
+        <h2>Your cart is empty</h2>
+        <button onClick={() => navigate('/')}>Continue Shopping</button>
+      </div>
+    );
+  }
 
   return (
-    <div className="container">
-      <h2>Your Cart</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-          {cart.map((cart_item, index) => (
+    <div className="cart-container">
+      <h2>Shopping Cart</h2>
+      <div className="cart-items">
+        {cart.map((cartItem, index) => (
+          cartItem && cartItem.product ? (
             <div key={index} className="cart-item">
-              <h3>{cart_item.product.name}</h3>
-              <p>Price: ₹{cart_item.product.price}</p>
-              <p>
-                Quantity:
-                <input
-                  type="number"
-                  min="0"
-                  value={cart_item.quantity}
-                  onChange={(event) => handleQuantityChange(cart_item.id, event)}
-                  style={{ marginLeft: '10px', width: '50px' }}
-                />
-              </p>
+              <img 
+                src={cartItem.product.image} 
+                alt={cartItem.product.name} 
+                className="cart-item-image"
+              />
+              <div className="cart-item-details">
+                <h3>{cartItem.product.name}</h3>
+                <p>₹{cartItem.product.price}</p>
+                <div className="quantity-controls">
+                  <button 
+                    onClick={() => onUpdateCartQuantity(cartItem.id, cartItem.quantity - 1)}
+                    disabled={cartItem.quantity <= 1}
+                  >
+                    -
+                  </button>
+                  <span>{cartItem.quantity}</span>
+                  <button 
+                    onClick={() => onUpdateCartQuantity(cartItem.id, cartItem.quantity + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button 
+                className="remove-button"
+                onClick={() => onUpdateCartQuantity(cartItem.id, 0)}
+              >
+                Remove
+              </button>
             </div>
-          ))}
-          <h3>Total: ${totalPrice}</h3>
-          <button onClick={handleCheckout}>Checkout</button> {/* Checkout button */}
+          ) : null
+        ))}
+      </div>
+      <div className="cart-summary">
+        <div className="total">
+          <span>Total:</span>
+          <span>₹{totalPrice}</span>
         </div>
-      )}
+        <button 
+          className="checkout-button"
+          onClick={() => navigate('/checkout')}
+          disabled={cart.length === 0}
+        >
+          Proceed to Checkout
+        </button>
+      </div>
     </div>
   );
 };
