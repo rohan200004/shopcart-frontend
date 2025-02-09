@@ -65,24 +65,23 @@ nav ul {
 }
 
 nav ul li {
-  color: white;
+  margin-top: 4px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
 nav ul li a {
-  color: white;
-  padding: 2px 5px;
+  padding: 4px 8px;
   background-color: #28a745;
-  text-decoration: none;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width:fit-content;
+  text-decoration: none;
 }
-
 nav ul li:hover {
-  background-color: #0056b3; /* Slightly darker shade of primary */
+  background-color:  #218838;/* Slightly darker shade of primary */
 }
 
 /* Active Link Styling */

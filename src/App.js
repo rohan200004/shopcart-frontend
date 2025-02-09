@@ -21,10 +21,6 @@ const App = () => {
   const [notification, setNotification] = useState(""); // Notification state
 
   useEffect(() => {
-    const userLoggedIn = localStorage.getItem("isLoggedIn");
-    if (userLoggedIn) {
-      setIsLoggedIn(true);
-    }
     const getCart = async () => {
       const data =  await api.get("/user/cart");
       if (data != null){
@@ -32,7 +28,11 @@ const App = () => {
         console.log(data.data.data[0].cart_item);
       }
     }
-    getCart();
+    const userLoggedIn = localStorage.getItem("isLoggedIn");
+    if (userLoggedIn) {
+      setIsLoggedIn(true);
+      getCart();
+    }
   }, []);
 
   const handleLogin = () => {

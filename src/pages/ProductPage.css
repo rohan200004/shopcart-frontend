@@ -1,112 +1,172 @@
 /* Page container */
 .product-page-container {
-    margin: 1%;
-  }
-  
-  .error-message {
-    color: red;
-    text-align: center;
-  }
-  
-  .product-section {
-    margin-bottom: 20px;
-  }
-  
-  .product-section h2 {
-    text-align: start;
-    font-size: 1.3rem;
-    color: #264653;
-  }
-  
-  .product-row {
-    padding: 5px;
-    display: flex;
-    gap: 5px;
-    overflow-x: auto;
-  }
+  margin: 0;
+  padding: 1% 2%;
+  background-color: #1a237e;  /* Navy blue background */
+}
 
-  /* Product card */
-  .product-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 5px;
-    width: 100px;
-    flex: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
+.error-message {
+  color: #dc3545;
+  text-align: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.1);
+}
+
+.product-section {
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Category Header */
+.category-header {
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+  background: #fff;  /* Flipkart-like white header */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.category-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #212121;  /* Flipkart-like dark text */
+  font-weight: 500;
+}
+
+.category-header button {
+  padding: 0.4rem 0.8rem;
+  background-color: #2874f0;  /* Flipkart blue */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.category-header button:hover {
+  background-color: #1c5eca;
+  transform: none;
+}
+
+/* Product Row - Horizontal Scrolling */
+.product-row {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  overflow-x: auto;
+  background-color: #fff;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Product Card */
+.product-card {
+  min-width: 100px;  /* Match image width */
+  flex: 0 0 auto;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);  /* Even darker shadow on hover */
+}
+
+.product-image {
+  width: 100px;  /* Fixed image width */
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.product-card h3 {
+  font-size: 0.9rem;
+  color: #212121;
+  margin: 0.3rem 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Remove product description */
+.product-description {
+  display: none;
+}
+
+.price {
+  font-size: 0.9rem;
+  color: #212121;
+  margin: 0.4rem 0;
+}
+
+/* Buttons */
+.add-to-cart-btn, .go-to-cart-btn {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.add-to-cart-btn {
+  background-color: #2874f0;  /* Flipkart blue */
+  color: white;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #1c5eca;
+  transform: none;
+}
+
+.go-to-cart-btn {
+  background-color: #ff9f00;  /* Flipkart orange */
+  color: white;
+}
+
+.go-to-cart-btn:hover {
+  background-color: #f39000;
+  transform: none;
+}
+
+/* Scrollbar Styling */
+.product-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.product-row::-webkit-scrollbar-track {
+  background: #f1f3f6;
+  border-radius: 4px;
+}
+
+.product-row::-webkit-scrollbar-thumb {
+  background: #2874f0;
+  border-radius: 4px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .product-page-container {
+    margin: 0;
+    padding: 0.5rem;
   }
   
-  .product-card:hover {
-    transform: translateY(-10px); /* Elevate the card on hover */
+  .product-card {
+    min-width: 90px;
   }
   
   .product-image {
-    width: 100%;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
+    width: 90px;
+    height: 90px;
   }
-  
-  .product-card h3 {
-    font-size: 1.0rem;
-    color: #264653;
-  }
-  
-  .product-description {
-    font-size: 0.7rem;
-    color: #757575;
-  }
-  
-  .price {
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  
-  .add-to-cart-btn {
-    border: none;
-    padding: 5px;
-    width: fit-content;
-    font-size: 0.8rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-to-cart-btn:hover {
-    background-color: grey;
-  }
-
-  .category-header {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px 8px 0px 0px;
-    background-color: #555555;
-  }
-  
-  .category-header h2 {
-    margin: 0;
-    font-size: 20px;
-    color: #ffffff;
-  }
-  
-  .category-header button {
-    padding: 4px 6px;
-    width: fit-content;
-    margin-right: 10px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .category-header button:hover {
-    background-color: #0056b3;
-  }
+}
