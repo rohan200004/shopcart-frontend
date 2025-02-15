@@ -5,7 +5,7 @@ import "./Auth.css"; // Custom styling for Auth
 import "../App.css"; // App-wide CSS
 
 const LoginPage = ({ onLogin }) => {
-  const [phone, setPhone] = useState(""); // Changed email to phone
+  const [username, setUsername] = useState(""); // Changed from phone
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const LoginPage = ({ onLogin }) => {
 
     try {
       const response = await api.post("/auth/loginwithpassword", {
-        phone,
+        username, // Changed from phone
         password,
       });
 
@@ -45,12 +45,12 @@ const LoginPage = ({ onLogin }) => {
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
-          <label>Phone</label>
+          <label>Username</label>
           <input
             type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Enter your phone number"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
             required
           />
           <label>Password</label>
@@ -63,9 +63,16 @@ const LoginPage = ({ onLogin }) => {
           />
           <button type="submit">Login</button>
         </form>
-        <p className="auth-redirect">
-          Don't have an account? <Link to="/register">Register Here</Link>
-        </p>
+        <div className="auth-links">
+          <p>
+            Don't have an account? <Link to="/register">Register Here</Link>
+          </p>
+          <p>
+            <Link to="/forgot-password" className="forgot-password-link">
+              Forgot Password?
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,27 @@
+.product-name {
+  color: #4a90e2; /* Light blue color */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.product-name:hover {
+  color: #357abd; /* Slightly darker blue on hover */
+}
+
+/* If you're using cards to display products */
+.product-card {
+  /* ... existing styles ... */
+}
+
+.product-card .product-name {
+  color: #4a90e2;
+  min-height: 2.4em; /* For consistent card heights */
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 

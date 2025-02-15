@@ -16,6 +16,7 @@ import OrdersPage from "./pages/OrdersPage";
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import PaymentPage from './pages/PaymentPage';
 import ProfilePage from './pages/ProfilePage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import api from "./utils/api";
 
 const App = () => {
@@ -241,6 +242,7 @@ const App = () => {
             )
           }
         />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       </Routes>
     </Router>
   );
