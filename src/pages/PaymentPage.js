@@ -20,9 +20,25 @@ const PaymentPage = ({ clearCart }) => {
     try {
       const order = {
         ...orderDetails,
-        pay_method: paymentMethod
+        pay_method: paymentMethod,
+        delivery_address: "Your delivery address here", // Replace with actual delivery address
+        delivery_date: new Date().toISOString(),
       };
-
+      console.log(order);
+      // Validate required fields
+      order.order_items = order.items;
+      const { total, order_items, pay_method, delivery_address, delivery_date } = order;
+      if (!total) {
+        alert("Total is required");
+      } else if (!order_items) {
+        alert("Order items are required");
+      } else if (!pay_method) {
+        alert("Payment method is required");
+      } else if (!delivery_address) {
+        alert("Delivery address is required");
+      } else if (!delivery_date) {
+        alert("Delivery date is required");
+      } else {
       const response = await api.post("/order", order);
 
       if (response.data.message === "Created") {
@@ -34,6 +50,7 @@ const PaymentPage = ({ clearCart }) => {
       } else {
         throw new Error('Order creation failed');
       }
+    }
     } catch (error) {
       console.error('Payment failed:', error);
       alert('Payment failed. Please try again.');
@@ -135,4 +152,4 @@ const PaymentPage = ({ clearCart }) => {
   );
 };
 
-export default PaymentPage; 
+export default PaymentPage;

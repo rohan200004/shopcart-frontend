@@ -174,7 +174,7 @@ const ProductPage = ({ cart, handleAddToCart }) => {
           </button>
         ))}
       </div>
-      <Carousel />
+      {/* <Carousel /> */}
       {loading && <p>Loading products...</p>}
       {error && <p className="error-message">{error}</p>}
 

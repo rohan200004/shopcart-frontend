@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../utils/api.js"; // Axios instance
-import "./Auth.css"; // Custom styling for Auth
+import "../styles/Auth.css"; // Custom styling for Auth
 import "../App.css"; // App-wide CSS
+import logo from '../assets/images/logo.jpg';
 
 const LoginPage = ({ onLogin }) => {
   const [username, setUsername] = useState(""); // Changed from phone
@@ -42,6 +43,9 @@ const LoginPage = ({ onLogin }) => {
   return (
     <div className="auth-container">
       <div className="auth-box">
+        <div className="logo-container">
+          <img src={logo} width="200" height="100" alt="ShopCart Logo" className="auth-logo" />
+        </div>
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>

@@ -1,0 +1,392 @@
+{
+	"message": "Success",
+	"count": 13,
+	"data": [
+		{
+			"id": 1,
+			"name": "Technology",
+			"status": true,
+			"subtype": [
+				{
+					"id": 41,
+					"name": "Mobiles",
+					"status": true
+				},
+				{
+					"id": 42,
+					"name": "Laptops",
+					"status": true
+				},
+				{
+					"id": 43,
+					"name": "Tablets",
+					"status": true
+				},
+				{
+					"id": 44,
+					"name": "Headphones",
+					"status": true
+				},
+				{
+					"id": 45,
+					"name": "Speakers",
+					"status": true
+				},
+				{
+					"id": 46,
+					"name": "Smart Watches",
+					"status": true
+				},
+				{
+					"id": 47,
+					"name": "Cameras",
+					"status": true
+				},
+				{
+					"id": 48,
+					"name": "Printers",
+					"status": true
+				},
+				{
+					"id": 49,
+					"name": "Accessories",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 2,
+			"name": "Fashion",
+			"status": true,
+			"subtype": [
+				{
+					"id": 50,
+					"name": "Mens Wear",
+					"status": true
+				},
+				{
+					"id": 51,
+					"name": "Womens Wear",
+					"status": true
+				},
+				{
+					"id": 52,
+					"name": "Kids Wear",
+					"status": true
+				},
+				{
+					"id": 53,
+					"name": "Footwear",
+					"status": true
+				},
+				{
+					"id": 54,
+					"name": "Accessories",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 3,
+			"name": "Home Appliances",
+			"status": true,
+			"subtype": [
+				{
+					"id": 55,
+					"name": "Kitchen Appliances",
+					"status": true
+				},
+				{
+					"id": 56,
+					"name": "Home Appliances",
+					"status": true
+				},
+				{
+					"id": 57,
+					"name": "Personal Care Appliances",
+					"status": true
+				},
+				{
+					"id": 58,
+					"name": "Gaming Consoles",
+					"status": true
+				},
+				{
+					"id": 59,
+					"name": "Others",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 4,
+			"name": "Furniture",
+			"status": true,
+			"subtype": [
+				{
+					"id": 26,
+					"name": "Cleaning & Household",
+					"status": true
+				},
+				{
+					"id": 27,
+					"name": "Furniture",
+					"status": true
+				},
+				{
+					"id": 28,
+					"name": "Home Decor",
+					"status": true
+				},
+				{
+					"id": 29,
+					"name": "Kitchen & Dining",
+					"status": true
+				},
+				{
+					"id": 30,
+					"name": "Home Furnishing",
+					"status": true
+				},
+				{
+					"id": 31,
+					"name": "Gardening",
+					"status": true
+				},
+				{
+					"id": 32,
+					"name": "Tools & Hardware",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 5,
+			"name": "Books",
+			"status": true,
+			"subtype": [
+				{
+					"id": 33,
+					"name": "Books",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 6,
+			"name": "Sports",
+			"status": true,
+			"subtype": [
+				{
+					"id": 34,
+					"name": "Sports",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 7,
+			"name": "Automobiles",
+			"status": true,
+			"subtype": [
+				{
+					"id": 35,
+					"name": "Automobiles",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 8,
+			"name": "Grocery",
+			"status": true,
+			"subtype": [
+				{
+					"id": 1,
+					"name": "Atta & Flours",
+					"status": true
+				},
+				{
+					"id": 2,
+					"name": "Rice & Rice Products",
+					"status": true
+				},
+				{
+					"id": 3,
+					"name": "Dals & Pulses",
+					"status": true
+				},
+				{
+					"id": 4,
+					"name": "Edible Oils & Ghee",
+					"status": true
+				},
+				{
+					"id": 5,
+					"name": "Spices & Masalas",
+					"status": true
+				},
+				{
+					"id": 6,
+					"name": "Salt, Sugar & Jaggery",
+					"status": true
+				},
+				{
+					"id": 7,
+					"name": "Dry Fruits & Nuts",
+					"status": true
+				},
+				{
+					"id": 8,
+					"name": "Biscuits & Cookies",
+					"status": true
+				},
+				{
+					"id": 9,
+					"name": "Breakfast Cereals",
+					"status": true
+				},
+				{
+					"id": 10,
+					"name": "Noodles & Pasta",
+					"status": true
+				},
+				{
+					"id": 11,
+					"name": "Sauces & Ketchups",
+					"status": true
+				},
+				{
+					"id": 12,
+					"name": "Pickles & Chutneys",
+					"status": true
+				},
+				{
+					"id": 13,
+					"name": "Jams & Spreads",
+					"status": true
+				},
+				{
+					"id": 14,
+					"name": "Tea & Coffee",
+					"status": true
+				},
+				{
+					"id": 15,
+					"name": "Soft Drinks",
+					"status": true
+				},
+				{
+					"id": 16,
+					"name": "Juices & Concentrates",
+					"status": true
+				},
+				{
+					"id": 17,
+					"name": "Health Drinks",
+					"status": true
+				},
+				{
+					"id": 18,
+					"name": "Water",
+					"status": true
+				},
+				{
+					"id": 19,
+					"name": "Milk & Dairy Products",
+					"status": true
+				},
+				{
+					"id": 20,
+					"name": "Bread & Bakery",
+					"status": true
+				},
+				{
+					"id": 21,
+					"name": "Ice Creams & Desserts",
+					"status": true
+				},
+				{
+					"id": 22,
+					"name": "Chocolates & Candies",
+					"status": true
+				},
+				{
+					"id": 23,
+					"name": "Snacks & Namkeens",
+					"status": true
+				},
+				{
+					"id": 24,
+					"name": "Frozen Foods",
+					"status": true
+				},
+				{
+					"id": 25,
+					"name": "Pet Food",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 9,
+			"name": "Health & Fitness",
+			"status": true,
+			"subtype": [
+				{
+					"id": 36,
+					"name": "Health & Fitness",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 10,
+			"name": "Beauty & Personal Care",
+			"status": true,
+			"subtype": [
+				{
+					"id": 37,
+					"name": "Beauty & Personal Care",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 11,
+			"name": "Toys & Baby Products",
+			"status": true,
+			"subtype": [
+				{
+					"id": 38,
+					"name": "Toys & Baby Products",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 12,
+			"name": "Stationery",
+			"status": true,
+			"subtype": [
+				{
+					"id": 39,
+					"name": "Stationery",
+					"status": true
+				}
+			]
+		},
+		{
+			"id": 13,
+			"name": "Others",
+			"status": true,
+			"subtype": [
+				{
+					"id": 40,
+					"name": "Others",
+					"status": true
+				}
+			]
+		}
+	]
+}

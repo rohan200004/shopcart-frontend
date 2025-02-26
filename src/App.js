@@ -8,7 +8,6 @@ import {
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
 import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -64,11 +63,12 @@ const App = () => {
       );
       setTimeout(() => setNotification(""), 3000);
     } else {
-      setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
       const res = await api.post("/user/cart", {product_id: product.id, quantity: 1});
-      console.log(`this is res:`);
-      console.log(res);
       if(res.data.message === "Success") {
+        const response = await api.get("/user/cart");
+        if (response && response.data && response.data.data && response.data.data[0]) {
+          setCart(response.data.data[0].cart_item || []);
+        }
         setNotification(`${product.name} has been added to your cart!`);
         setTimeout(() => setNotification(""), 3000);
       } else {
@@ -176,16 +176,6 @@ const App = () => {
                 cart={cart}
                 onUpdateCartQuantity={handleUpdateCartQuantity}
               />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            isLoggedIn ? (
-              <CheckoutPage cart={cart} clearCart={clearCart} />
             ) : (
               <Navigate to="/login" />
             )

@@ -7,7 +7,6 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // Get auth status from localStorage
   const isLoggedIn = localStorage.getItem('token') !== null;
 
   const handleLogout = () => {
@@ -15,7 +14,7 @@ const Navbar = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('isLoggedIn');
     navigate('/login');
-    window.location.reload(); // Force refresh to update navbar state
+    window.location.reload();
   };
 
   return (
@@ -23,7 +22,6 @@ const Navbar = () => {
       <span className="brand-logo" onClick={() => navigate('/')}>ShopCart</span>
       <div className="nav-links">
         {isLoggedIn ? (
-          // Show these links only when logged in
           <>
             <button className="nav-button" onClick={() => navigate('/')}>
               Home
@@ -65,7 +63,6 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          // Show these links when not logged in
           <>
             <button className="nav-button" onClick={() => navigate('/login')}>
               Login

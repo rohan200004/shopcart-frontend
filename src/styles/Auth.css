@@ -95,4 +95,41 @@ button:hover:not(:disabled) {
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+/* Update the logo styling */
+.logo-container {
+  text-align: center;  /* Center align the container */
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  display: flex;      /* Add flex display */
+  justify-content: center;  /* Center horizontally */
+  align-items: center;     /* Center vertically */
+}
+
+.auth-logo {
+  width: 200px;     /* Match the width from your img tag */
+  height: 100px;    /* Match the height from your img tag */
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Remove duplicate .auth-logo declaration */
+.auth-logo:hover {
+  transform: scale(1.01);
+}
+
+/* Update auth box to better accommodate logo */
+.auth-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
 } 

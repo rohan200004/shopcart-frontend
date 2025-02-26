@@ -56,7 +56,7 @@ const OrdersPage = () => {
         <div className="no-orders">
           <h3>No Orders Yet</h3>
           <p>Looks like you haven't placed any orders yet.</p>
-          <Link to="/products" className="shop-now-btn">
+          <Link to="/" className="shop-now-btn">
             Start Shopping
           </Link>
         </div>

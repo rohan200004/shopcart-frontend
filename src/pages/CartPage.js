@@ -5,13 +5,30 @@ import './CartPage.css';
 const CartPage = ({ cart = [], onUpdateCartQuantity }) => {
   const navigate = useNavigate();
 
-  // Add null check for cart items
+  // Calculate total price
   const totalPrice = cart.reduce((total, cartItem) => {
     if (cartItem && cartItem.product && cartItem.product.price && cartItem.quantity) {
       return total + (cartItem.product.price * cartItem.quantity);
     }
     return total;
   }, 0);
+
+  const handleProceedToPayment = () => {
+    // Create order details object
+    const orderDetails = {
+      total: totalPrice,
+      items: cart.map(item => ({
+        product_id: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price
+      }))
+    };
+
+    // Navigate to payment page with order details
+    navigate('/payment', { 
+      state: { orderDetails } 
+    });
+  };
 
   if (!cart || cart.length === 0) {
     return (
@@ -38,14 +55,14 @@ const CartPage = ({ cart = [], onUpdateCartQuantity }) => {
                 <h3>{cartItem.product.name}</h3>
                 <p>₹{cartItem.product.price}</p>
                 <div className="quantity-controls">
-                  <button 
+                  <button className='quantity-button'
                     onClick={() => onUpdateCartQuantity(cartItem.id, cartItem.quantity - 1)}
                     disabled={cartItem.quantity <= 1}
                   >
                     -
                   </button>
                   <span>{cartItem.quantity}</span>
-                  <button 
+                  <button className='quantity-button'
                     onClick={() => onUpdateCartQuantity(cartItem.id, cartItem.quantity + 1)}
                   >
                     +
@@ -69,10 +86,10 @@ const CartPage = ({ cart = [], onUpdateCartQuantity }) => {
         </div>
         <button 
           className="checkout-button"
-          onClick={() => navigate('/checkout')}
+          onClick={handleProceedToPayment}
           disabled={cart.length === 0}
         >
-          Proceed to Checkout
+          Proceed to Payment
         </button>
       </div>
     </div>

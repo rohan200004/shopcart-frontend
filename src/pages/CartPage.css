@@ -19,10 +19,21 @@
 
 .cart-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
   border-bottom: 1px solid #f0f0f0;
   position: relative;
+}
+
+.remove-button{
+  width: 100px;
+  margin-top: 40px;
+  background-color: #fb641b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
 }
 
 .cart-item:last-child {
@@ -102,10 +113,6 @@
   font-size: 0.9rem;
   padding: 0.5rem;
   transition: color 0.2s ease;
-}
-
-.remove-button:hover {
-  color: #ff0000;
 }
 
 .cart-summary {
