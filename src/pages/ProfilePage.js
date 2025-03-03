@@ -106,7 +106,6 @@ const ProfilePage = () => {
               alt={profile.name} 
               className="profile-pic"
             />
-            <button className="change-pic-btn">Change Picture</button>
           </div>
           <div className="user-details">
             <h2>Personal Information</h2>

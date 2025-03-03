@@ -32,35 +32,12 @@ const Navbar = () => {
             <button className="nav-button" onClick={() => navigate('/order')}>
               Orders
             </button>
-            <div className="profile-menu">
-              <button
-                ref={buttonRef}
-                className="profile-button"
-                onClick={() => setShowDropdown(!showDropdown)}
-              >
-                Menu
-              </button>
-              {showDropdown && (
-                <div ref={dropdownRef} className="profile-dropdown">
-                  <button
-                    className="dropdown-item"
-                    onClick={() => {
-                      setShowDropdown(false);
-                      navigate('/profile');
-                    }}
-                  >
-                    <i className="fas fa-user-circle"></i>
-                    Profile
-                  </button>
-                  <button
-                    className="dropdown-item"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+            <button
+              className="nav-button"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>

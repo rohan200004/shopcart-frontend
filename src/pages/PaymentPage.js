@@ -9,6 +9,8 @@ const PaymentPage = ({ clearCart }) => {
   const { orderDetails } = location.state || {};
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [loading, setLoading] = useState(false);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+
 
   if (!orderDetails) {
     navigate('/cart');
@@ -21,7 +23,8 @@ const PaymentPage = ({ clearCart }) => {
       const order = {
         ...orderDetails,
         pay_method: paymentMethod,
-        delivery_address: "Your delivery address here", // Replace with actual delivery address
+        delivery_address: deliveryAddress,
+
         delivery_date: new Date().toISOString(),
       };
       console.log(order);
@@ -39,18 +42,45 @@ const PaymentPage = ({ clearCart }) => {
       } else if (!delivery_date) {
         alert("Delivery date is required");
       } else {
-      const response = await api.post("/order", order);
+        const response = await api.post("/order", order);
+        if (response.status === 201) {
+          const order_id = response.data.id;
+          const options = {
+            key: 'rzp_test_zHqDbIZs1T1BdQ',  // Replace with your Razorpay public key
+            amount: total,          // Amount in paise
+            currency: 'INR',
+            name: 'Your Company Name',
+            description: 'Test Payment',
+            order_id,  // Order ID from the backend
+            handler: function (response) {
+              alert('Payment Successful');
+              console.log(response);
+            },
+            prefill: {
+              name: 'John Doe',
+              email: 'john.doe@example.com',
+              contact: '9876543210',
+            },
+            notes: {
+              address: 'Razorpay Corporate Office',
+            },
+            theme: {
+              color: '#F37254',
+            },
+          };
 
-      if (response.data.message === "Created") {
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        await clearCart();
-        alert('Order placed successfully!');
-        navigate('/order');
-      } else {
-        throw new Error('Order creation failed');
+          const rzp1 = new window.Razorpay(options);
+          rzp1.open();
+          if (response.data.message === "Created") {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            await clearCart();
+            alert('Order placed successfully!');
+            navigate('/order');
+          } else {
+            throw new Error('Order creation failed');
+          }
+        }
       }
-    }
     } catch (error) {
       console.error('Payment failed:', error);
       alert('Payment failed. Please try again.');
@@ -66,6 +96,7 @@ const PaymentPage = ({ clearCart }) => {
         <div className="order-summary">
           <h3>Order Summary</h3>
           <p>Total Amount: ₹{orderDetails.total}</p>
+          
         </div>
 
         <div className="payment-methods">
@@ -140,7 +171,17 @@ const PaymentPage = ({ clearCart }) => {
           </div>
         )}
 
-        <button 
+        <div className="form-group">
+          <label>Delivery Address</label>
+          <input 
+            type="text" 
+            placeholder="Enter your delivery address" 
+            value={deliveryAddress} 
+            onChange={(e) => setDeliveryAddress(e.target.value)} 
+          />
+        </div>
+        <button
+
           className={`pay-button ${loading ? 'loading' : ''}`}
           onClick={handlePayment}
           disabled={loading}

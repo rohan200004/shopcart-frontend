@@ -15,6 +15,7 @@ const OrdersPage = () => {
     try {
       const response = await api.get("/user/orders");
       setOrders(response.data.data);
+      console.log(orders)
       setLoading(false);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -82,17 +83,13 @@ const OrdersPage = () => {
               <div className="order-details">
                 <div className="order-info-item">
                   <span className="info-label">Status</span>
-                  <span className={getStatusClass(order.status)}>
-                    {order.status}
+                  <span className={getStatusClass(order.order_status)}>
+                    {order.order_status}
                   </span>
                 </div>
                 <div className="order-info-item">
                   <span className="info-label">Shipping Address</span>
-                  <span className="info-value">{order.shippingAddress}</span>
-                </div>
-                <div className="order-info-item">
-                  <span className="info-label">Payment Method</span>
-                  <span className="info-value">{order.paymentMethod}</span>
+                  <span className="info-value">{order.delivery_address}</span>
                 </div>
               </div>
 
